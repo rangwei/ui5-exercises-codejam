@@ -9,7 +9,8 @@
 				<content>
 					<Panel headerText="Hello, Dev! 👋">
 						<content>
-							<Table items="{/value}">
+						<SearchField liveChange=".onSearch"/>
+							<Table id="booksTable" items="{/value}">
 								<columns>
 									<Column>
 										<Text text="Book"/>
@@ -51,10 +52,30 @@
 								direction="Column"
 								class="sapUiMediumMarginTop"
 							>
+								<FlexBox
+									alignItems="Center"
+									justifyContent="End"
+								>
+									<ObjectStatus
+										id="orderStatus"
+										text=""
+									/>
+									<Button
+										text="Order"
+										press=".onSubmitOrder"
+									/>
+									<StepInput
+										value="{userSelection>/selectedQuantity}"
+										min="0"
+										textAlign="Center"
+										class="sapUiSmallMarginRight"
+										max="{userSelection>/selectedItemData/stock}"
+									/>
+								</FlexBox>
 								<FlexBox direction="Column">
-									<Title text="{title}"/>
+									<Title text="{userSelection>/selectedItemData/title}"/>
 									<Text
-										text="{descr}"
+										text="{userSelection>/selectedItemData/descr}"
 										class="sapUiSmallMarginTop"
 									/>
 								</FlexBox>
